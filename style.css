@@ -15,11 +15,16 @@
 }
 
 .search {
-  background-color: springgreen;
-  
+  background-color: rgb(175, 245, 175);
+  padding: 25px;
 }
 
-.current {
-  background-color: violet;
-  
+
+.card {
+  background-color: lightgoldenrodyellow;
+  padding: 25px;
+}
+
+#currentDisplay {
+  background-color: coral;
 }

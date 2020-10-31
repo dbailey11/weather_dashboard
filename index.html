@@ -20,21 +20,46 @@
       <h1>Weather Dashboard</h1>
     </header>
     <div class="container">
-      <div class="col-sm-4 search">
-        Search Cities
-        <input id="search-input" />
-        <button id="search-button">Search</button>
+      <div class="row">
+        <div class="col-sm-5 search">
+          Search Cities
+          <form class="form_inline">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="search-input"
+            />
+            <button
+              class="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+              id="search-button"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+        <div class="col-sm-7">
+          <div class="card" style="border: 10px">
+            <div class="card-body" id="currentDisplay">
+              <div id="city-date">
+                <span id="name"></span>
+              </div>
+              <br />
+              <p class="text" id="temp">Temp:</p>
+              <br />
+              <p class="text" id="humidity">Humiditiy:</p>
+              <br />
+              <p class="text" id="wind">Wind:</p>
+              <br />
+              <p class="text" id="uv">UV Index:</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-8 current" id="currentDisplay">
-        <h2>Current Weather</h2>
-        <p>Name: <span id="name"></span> 
-        <br>
-        Humidity: <span id="humidity"></span>
-        <br>
-        Wind Speed: <span id="wind"></span>
-        <br>
-        UV Index: <span id="uv"></span>
-        </p>
+      <div class="row">
+        <div class="col-sm-12"></div>
       </div>
     </div>
 
