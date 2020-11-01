@@ -11,6 +11,8 @@
 var searchButton = document.getElementById("search-button");
 var apiKey = "1d11cd9fa7c01b9a2502e818bcb69115"; //my openweatherapi key
 var cityName = "Denver";
+var cityLat = 39.74;
+var cityLon = -104.98;
 
 //button event listener that calls the openweatherapi function
 searchButton.addEventListener("click", getCityWeather);
@@ -23,31 +25,49 @@ function getCityWeather(event) {
   // console.log(searchInput);
 
   //fetching openweatherapi data
+  //add &units=imperial
   fetch(
     "http://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
-      "&appid=" +
+      "&units=imperial&appid=" +
       apiKey
   )
     .then((response) => response.json())
     //call to function
     .then((data) => currentDataDisplay(data));
+      return fetch("http://api.openweathermap.org/data/2.5/uvi?q" +
+      "&lat=" + cityLat + "&lon=" + cityLon +
+      "&appid=" +
+      apiKey)
+
+      .then((response) => response.json())
+      //call to function
+      .then((data) => currentUVDisplay(data));
 
   function currentDataDisplay(data) {
     var cityName = data.name;
     var cityHumidity = data.main.humidity;
     var cityWind = data.wind.speed;
     var cityTemp = data.main.temp;
+    // var cityUV = data.value;
 
     var stateName = document.getElementById("name");
     var humidity = document.getElementById("humidity");
     var wind = document.getElementById("wind");
     var temp = document.getElementById("temp");
+    // var uv = document.getElementById("uv");
 
     stateName.innerText = cityName;
     humidity.innerText = "Humidity: " + cityHumidity;
     wind.innerText = "Wind Speed: " + cityWind;
     temp.innerText = "Current Temperature: " + cityTemp;
+    // uv.innerText = "UV Index: " + cityUV;
+  }
+
+  function currentUVDisplay (data) {
+    var cityUV = data.value;
+    var uv = document.getElementById("uv");
+    uv.innerText = "UV Index: " + cityUV;
   }
 }
 // console.log(searchButton);
