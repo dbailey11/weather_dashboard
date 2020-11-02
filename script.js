@@ -23,12 +23,12 @@ var previousCities = [];
 //button event listener that calls the openweatherapi function
 searchButton.addEventListener("click", getCityWeather);
 
+
 //function to get openweatherapi data
 function getCityWeather(event) {
   event.preventDefault();
-
   //whatever city user puts in
-  cityName = document.getElementById("search-input").value;
+  cityName = document.getElementById('search-input').value;
   // console.log(cityName);
 
   //setting user input to local storage with key
@@ -138,7 +138,14 @@ function getCityWeather(event) {
     //loop to display previous searched cities
     for (i = 0; i < previousCities.length; i++) {
       var prevCity = localStorage.getItem(previousCities[i]);
-      var prevCityDiv = document.createElement("div");
+      var prevCityDiv = document.createElement("li");
+      prevCityDiv.classList.add('item');
+
+      prevCityDiv.addEventListener('click', function(event) {
+        console.log(this.textContent);
+        document.getElementById('search-input').value = this.textContent;
+        getCityWeather(event);
+      });
 
       //setting div to display city name
       prevCityDiv.textContent = prevCity;
@@ -162,18 +169,28 @@ function getCityWeather(event) {
         currentDay = data.list[i].dt_txt.substring(8, 10);
       }
     }
-    console.log(indexes);
+    // console.log(indexes);
 
     //takes off extra day
     indexes.pop(indexes.length - 1);
 
     //loop to display 5 day forecast in each card
     for (i = 0; i < indexes.length; i++) {
-      console.log(data.list[indexes[i]]);
+      // console.log(data.list[indexes[i]]);
+
+      var D = new Date();
+    var dateString =
+      " (" +
+      (D.getUTCMonth() + 1) +
+      "-" +
+      D.getUTCDay() +
+      "-" +
+      D.getUTCFullYear() +
+      ")";
 
       //cancatenation of all the data from the forecast api
       document.getElementById(i).innerHTML =
-        data.list[indexes[i]].dt_txt.substring(0, 10) +
+        dateString +
         "<br />" +
         "<img src=' http://openweathermap.org/img/wn/" +
         data.list[indexes[i]].weather[0].icon +
