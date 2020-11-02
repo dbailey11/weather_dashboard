@@ -21,7 +21,7 @@
     </header>
     <div class="container">
       <div class="row">
-        <div class="col-sm-5 search">
+        <div class="col-sm-5 search" style="font-weight: bolder;">
           Search Cities
           <form class="form_inline">
             <input
@@ -40,70 +40,69 @@
             </button>
           </form>
           <ul class="list" id="previousCities" style="list-style-type: none;">
-            
           </ul>
         </div>
         <div class="col-sm-7">
-          <div class="card" style="border: 10px">
+          <div class="card">
             <div class="card-body" id="currentDisplay">
               <div id="city-date">
-                <span id="name"></span>
+                <span id="name" style="font-size: xx-large;"></span>
               </div>
               <br />
-              <p class="text" id="temp">Temp:</p>
+              <p class="text" id="temp" style="font-weight: 600;">Temp:</p>
               <br />
-              <p class="text" id="humidity">Humiditiy:</p>
+              <p class="text" id="humidity" style="font-weight: 600;">Humiditiy:</p>
               <br />
-              <p class="text" id="wind">Wind:</p>
+              <p class="text" id="wind" style="font-weight: 600;">Wind:</p>
               <br />
-              <p class="text" id="uv">UV Index:</p>
+              <p class="text" id="uv" style="font-weight: 600;">UV Index:</p>
             </div>
           </div>
         </div>
       </div>
 
       <!--container with portfolio projects-->
-    <div class="container">
-      <div class="card-header">5 Day Forecast</div>
+    <div class="container" id="forecast">
+      <div class="card-header" style="font-weight: bolder;">5 Day Forecast</div>
       <div class="card-deck">
         <div class="row">
           <!--monday-->
           <div class="col-sm-2">
             <div class="card">
-              <div class="card-body">
-                <p class="card-tex" id="0"></p>
+              <div class="card-body-forecast">
+                <p class="card-text" id="0"></p>
               </div>
             </div>
           </div>
           <!--tuesday-->
           <div class="col-sm-2">
             <div class="card">
-              <div class="card-body">
-                <p class="card-tex" id="1"></p>
+              <div class="card-body-forecast">
+                <p class="card-text" id="1"></p>
               </div>
             </div>
           </div>
           <!--wednesday-->
           <div class="col-sm-2">
             <div class="card">
-              <div class="card-body">
-                <p class="card-tex" id="2"></p>
+              <div class="card-body-forecast">
+                <p class="card-text" id="2"></p>
               </div>
             </div>
           </div>
           <!--thursday-->
           <div class="col-sm-2">
             <div class="card">
-              <div class="card-body">
-                <p class="card-tex" id="3"></p>
+              <div class="card-body-forecast">
+                <p class="card-text" id="3"></p>
               </div>
             </div>
           </div>
           <!--friday-->
           <div class="col-sm-2">
             <div class="card">
-              <div class="card-body">
-                <p class="card-tex" id="4"></p>
+              <div class="card-body-forecast">
+                <p class="card-text" id="4"></p>
               </div>
             </div>
           </div>
