@@ -6,7 +6,7 @@ The purpose of this application was to practice using Fetch calls and accessing 
 
 ## Screenshots
 
-![Image of daily planner application](assets\img\weather_dashboard_screenshot.png)
+![Image of daily planner application](assets/img/weather_dashboard_screenshot.png)
 
 ## Installation
 
