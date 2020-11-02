@@ -27,13 +27,18 @@ searchButton.addEventListener("click", getCityWeather);
 function getCityWeather(event) {
   event.preventDefault();
 
+  //whatever city user puts in
   cityName = document.getElementById("search-input").value;
-  console.log(cityName);
+  // console.log(cityName);
 
+  //setting user input to local storage with key
   localStorage.setItem("previous" + previousCities.length, cityName);
 
+  //putting searched city into array
   previousCities.push("previous" + previousCities.length + "");
-  console.log(previousCities[0]);
+  // console.log(previousCities[0]);
+
+  //calling function
   updatePreviousCities();
 
   //fetching openweatherapi data for current weather
@@ -71,6 +76,20 @@ function getCityWeather(event) {
       //call to function
       .then((data) => currentUVDisplay(data));
 
+    //5 day forecast
+    fetch(
+      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+        data.name +
+        "&units=imperial&appid=" +
+        apiKey
+    )
+      .then((response) => response.json())
+      //call to function
+      .then((data) => forecastDisplay(data))
+      .catch((error) => {
+        throw new Error("City Doesnt Exist");
+      });
+
     //declaring variablese that call the html IDs
     var stateName = document.getElementById("name");
     var humidity = document.getElementById("humidity");
@@ -78,7 +97,25 @@ function getCityWeather(event) {
     var temp = document.getElementById("temp");
 
     //putting api data into webpage
-    stateName.innerText = cityName;
+    //getting current date and formatting
+    var D = new Date();
+    var dateString =
+      " (" +
+      (D.getUTCMonth() + 1) +
+      "-" +
+      D.getUTCDay() +
+      "-" +
+      D.getUTCFullYear() +
+      ")";
+    // console.log(D.getFullYear());
+
+    //setting all current weather features
+    stateName.innerHTML =
+      cityName +
+      dateString +
+      "<img src=' http://openweathermap.org/img/wn/" +
+      data.weather[0].icon +
+      ".png'>";
     humidity.innerText = "Humidity: " + cityHumidity;
     wind.innerText = "Wind Speed: " + cityWind;
     temp.innerText = "Current Temperature: " + cityTemp;
@@ -90,23 +127,64 @@ function getCityWeather(event) {
     uv.innerText = "UV Index: " + cityUV;
   }
 
-  function updatePreviousCities () {
+  function updatePreviousCities() {
+    var cityDiv = document.getElementById("previousCities");
 
-    var cityDiv = document.getElementById('previousCities');
-    
-    //clearing children out 
+    //clearing children out
     while (cityDiv.firstChild) {
       cityDiv.removeChild(cityDiv.firstChild);
     }
 
-    for(i = 0; i < previousCities.length; i++) {
+    //loop to display previous searched cities
+    for (i = 0; i < previousCities.length; i++) {
       var prevCity = localStorage.getItem(previousCities[i]);
-      var prevCityDiv = document.createElement('div');
+      var prevCityDiv = document.createElement("div");
 
+      //setting div to display city name
       prevCityDiv.textContent = prevCity;
       cityDiv.appendChild(prevCityDiv);
     }
   }
 
+  function forecastDisplay(data) {
+    var indexes = [];
+    //pulls the current day--------------just day
+    var currentDay = data.list[0].dt_txt.substring(8, 10);
+    // console.log(currentDay);
+    indexes.push(0);
+
+    //loop through and just get data for each new day for forecast
+    //to make sure data by day not hour displays
+    //(8, 10) - just to get the days and not any of the other date info
+    for (i = 0; i < data.list.length; i++) {
+      if (data.list[i].dt_txt.substring(8, 10) !== currentDay) {
+        indexes.push(i);
+        currentDay = data.list[i].dt_txt.substring(8, 10);
+      }
+    }
+    console.log(indexes);
+
+    //takes off extra day
+    indexes.pop(indexes.length - 1);
+
+    //loop to display 5 day forecast in each card
+    for (i = 0; i < indexes.length; i++) {
+      console.log(data.list[indexes[i]]);
+
+      //cancatenation of all the data from the forecast api
+      document.getElementById(i).innerHTML =
+        data.list[indexes[i]].dt_txt.substring(0, 10) +
+        "<br />" +
+        "<img src=' http://openweathermap.org/img/wn/" +
+        data.list[indexes[i]].weather[0].icon +
+        ".png'>" +
+        "<br />" +
+        "Temp: " +
+        data.list[indexes[i]].main.temp +
+        "<br />" +
+        "Humidity: " +
+        data.list[indexes[i]].main.humidity;
+    }
+  }
 }
 // console.log(searchButton);
