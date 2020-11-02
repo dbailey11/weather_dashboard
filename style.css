@@ -11,14 +11,12 @@
 
 .container {
   align-items: center;
-  
 }
 
 .search {
   background-color: rgb(175, 245, 175);
   padding: 25px;
 }
-
 
 .card {
   background-color: lightgoldenrodyellow;
@@ -27,4 +25,12 @@
 
 #currentDisplay {
   background-color: coral;
+}
+
+#forecast {
+  background-color: cyan;
+}
+
+.card_body {
+  background-color: pink;
 }
