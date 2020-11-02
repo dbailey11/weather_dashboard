@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The purpose of this application was to practice using Fetch calls and accessing data from thrid party API's. The user story is for any person wanting to look up the current weather and 5 day forecast for any US city. Once the user enters a city name and clicks search the current conditions and future forecase will show for that city including icons for current weather conditions. With using local storage, previously searched cities also will display making it easier for the user to access weather conditions. This application uses OpenWeather API's to access current conditions, the UV index and 5 day forecast. Vanilla Javascript and Fetch was used to access the API data and display it onto the webpage.
+The purpose of this application was to practice using Fetch calls and accessing data from third party API's. The user story is for any person wanting to look up the current weather and 5 day forecast for any US city. Once the user enters a city name and clicks search the current conditions and future forecase will show for that city including icons for current weather conditions. With using local storage, previously searched cities also will display making it easier for the user to access weather conditions. This application uses OpenWeather API's to access current conditions, the UV index and 5 day forecast. Vanilla Javascript and Fetch was used to access the API data and display it onto the webpage.
 
 ## Screenshots
 
