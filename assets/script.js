@@ -1,4 +1,3 @@
-
 //declaring variables
 var searchButton = document.getElementById("search-button");
 // var userInput = document.getElementById("")
@@ -14,12 +13,11 @@ var previousCities = [];
 //button event listener that calls the openweatherapi function
 searchButton.addEventListener("click", getCityWeather);
 
-
 //function to get openweatherapi data
 function getCityWeather(event) {
   event.preventDefault();
   //whatever city user puts in
-  cityName = document.getElementById('search-input').value;
+  cityName = document.getElementById("search-input").value;
   console.log(cityName);
 
   //setting user input to local storage with key
@@ -34,7 +32,7 @@ function getCityWeather(event) {
 
   //fetching openweatherapi data for current weather
   fetch(
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
       "&units=imperial&appid=" +
       apiKey
@@ -55,7 +53,7 @@ function getCityWeather(event) {
 
     //UV index fetch
     fetch(
-      "http://api.openweathermap.org/data/2.5/uvi?q" +
+      "https://api.openweathermap.org/data/2.5/uvi?q" +
         "&lat=" +
         data.coord.lat +
         "&lon=" +
@@ -69,7 +67,7 @@ function getCityWeather(event) {
 
     //5 day forecast
     fetch(
-      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
         data.name +
         "&units=imperial&appid=" +
         apiKey
@@ -130,11 +128,11 @@ function getCityWeather(event) {
     for (i = 0; i < previousCities.length; i++) {
       var prevCity = localStorage.getItem(previousCities[i]);
       var prevCityDiv = document.createElement("li");
-      prevCityDiv.classList.add('item');
+      prevCityDiv.classList.add("item");
 
-      prevCityDiv.addEventListener('click', function(event) {
+      prevCityDiv.addEventListener("click", function (event) {
         console.log(this.textContent);
-        document.getElementById('search-input').value = this.textContent;
+        document.getElementById("search-input").value = this.textContent;
         getCityWeather(event);
       });
 
@@ -170,14 +168,14 @@ function getCityWeather(event) {
       // console.log(data.list[indexes[i]]);
 
       var D = new Date();
-    var dateString =
-      " (" +
-      (D.getUTCMonth() + 1) +
-      "-" +
-      D.getUTCDay() +
-      "-" +
-      D.getUTCFullYear() +
-      ")";
+      var dateString =
+        " (" +
+        (D.getUTCMonth() + 1) +
+        "-" +
+        D.getUTCDay() +
+        "-" +
+        D.getUTCFullYear() +
+        ")";
 
       //cancatenation of all the data from the forecast api
       document.getElementById(i).innerHTML =
