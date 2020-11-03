@@ -20,14 +20,14 @@ function getCityWeather(event) {
   event.preventDefault();
   //whatever city user puts in
   cityName = document.getElementById('search-input').value;
-  // console.log(cityName);
+  console.log(cityName);
 
   //setting user input to local storage with key
   localStorage.setItem("previous" + previousCities.length, cityName);
 
   //putting searched city into array
   previousCities.push("previous" + previousCities.length + "");
-  // console.log(previousCities[0]);
+  console.log(previousCities[0]);
 
   //calling function
   updatePreviousCities();
@@ -98,7 +98,7 @@ function getCityWeather(event) {
       "-" +
       D.getUTCFullYear() +
       ")";
-    // console.log(D.getFullYear());
+    console.log(D.getFullYear());
 
     //setting all current weather features
     stateName.innerHTML =
