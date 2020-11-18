@@ -20,12 +20,24 @@ function getCityWeather(event) {
   cityName = document.getElementById("search-input").value;
   console.log(cityName);
 
-  //setting user input to local storage with key
-  localStorage.setItem("previous" + previousCities.length, cityName);
+  var cityExists = false;
 
-  //putting searched city into array
-  previousCities.push("previous" + previousCities.length + "");
-  console.log(previousCities[0]);
+  //loop to check already searched names and not repeat
+  for (i = 0; i < previousCities.length; i++) {
+    var currentCity = localStorage.getItem(previousCities[i]);
+    if (currentCity == cityName) {
+      cityExists = true;
+    }
+  }
+
+  //setting user input to local storage with key
+  if (!cityExists) {
+    localStorage.setItem("previous" + previousCities.length, cityName);
+
+    //putting searched city into array
+    previousCities.push("previous" + previousCities.length + "");
+  }
+  // console.log(previousCities[0]);
 
   //calling function
   updatePreviousCities();
@@ -64,6 +76,7 @@ function getCityWeather(event) {
       .then((response) => response.json())
       //call to function
       .then((data) => currentUVDisplay(data));
+    // console.log(data);
 
     //5 day forecast
     fetch(
@@ -112,8 +125,20 @@ function getCityWeather(event) {
 
   function currentUVDisplay(data) {
     var cityUV = data.value;
-    var uv = document.getElementById("uv");
-    uv.innerText = "UV Index: " + cityUV;
+    var uv = document.getElementById("uvnum");
+    uv.innerText = cityUV;
+
+    //UV index badge color
+    if (cityUV <= 3) {
+      uv.style.backgroundColor = "green";
+      uv.style.color = "white";
+    } else if (cityUV >= 3 || cityUV <= 6) {
+      uv.style.backgroundColor = "yellow";
+      uv.style.color = "black";
+    } else {
+      uv.style.backgroundColor = "red";
+      uv.style.color = "white";
+    }
   }
 
   function updatePreviousCities() {
